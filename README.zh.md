@@ -1,6 +1,6 @@
 # covid19-dc-vue-admin
 
-`🇯🇵日本語` (./README.md) | [`🇺🇸English`](./README.en.md) | [`🇨🇳中文`]
+[`🇯🇵日本語`](./README.md) | [`🇺🇸English`](./README.en.md) | [`🇨🇳中文`]
 
 在管理屏幕界面[vue-element-admin](https://github.com/PanJiaChen/vue-admin-template)的仪表板上，[新的Corona病毒感染者状态多维图表](https://github.com/yoshinaga-ken/covid19-dc)已实现。
 
@@ -8,7 +8,7 @@
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
+[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/)
 
 ## Project setup
 

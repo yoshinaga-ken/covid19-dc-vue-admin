@@ -1,6 +1,6 @@
 # covid19-dc-vue-admin
 
-`🇯🇵日本語`| [`🇺🇸English`](./README.en.md) | [`🇨🇳中文`](./README.zh.md) 
+[`🇯🇵日本語`] | [`🇺🇸English`](./README.en.md) | [`🇨🇳中文`](./README.zh.md) 
 
 管理画面のインタフェース[vue-element-admin](https://github.com/PanJiaChen/vue-admin-template)のダッシュボードに[新型コロナウイルス 感染者状況 多次元チャート](https://github.com/yoshinaga-ken/covid19-dc)　を実装。
 
@@ -8,7 +8,7 @@ vueの Element UI＆axios＆iconfont＆permission control＆lintを備えた最�
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
  
-[デモページ](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
+[デモページ](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/)
 
 ## Project setup
 

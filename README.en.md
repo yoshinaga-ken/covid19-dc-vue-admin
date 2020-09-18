@@ -1,6 +1,6 @@
 # covid19-dc-vue-admin
 
-[🇯🇵日本語] (./README.md) | [`🇺🇸English`] | [`🇨🇳中文`](./README.zh.md)
+[`🇯🇵日本語`](./README.md) | [`🇺🇸English`] | [`🇨🇳中文`](./README.zh.md)
 
 On the dashboard of the management screen interface [vue-element-admin](https://github.com/PanJiaChen/vue-admin-template), [New Coronavirus Infected Person Status Multidimensional Chart](https://github.com/yoshinaga-ken/covid19-dc) implemented.
 
@@ -8,7 +8,7 @@ A minimal vue admin template with Element UI & axios & iconfont & permission con
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
+[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/)
 
 ## Project setup
 
