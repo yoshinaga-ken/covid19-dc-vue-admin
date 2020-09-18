@@ -6,10 +6,9 @@
 
 vueの Element UI＆axios＆iconfont＆permission control＆lintを備えた最小限の管理画面テンプレート
 
-![image](img/hlp/covid19-dc-demo-v1.gif)
+![image](public/img/hlp/covid19-dc-vue-admin.gif)
  
-[デモページ](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/)
-
+[デモページ](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
 
 ## Project setup
 

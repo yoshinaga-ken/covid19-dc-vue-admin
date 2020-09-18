@@ -6,10 +6,9 @@ On the dashboard of the management screen interface [vue-element-admin](https://
 
 A minimal vue admin template with Element UI & axios & iconfont & permission control & lint.
 
-![image](img/hlp/covid19-dc-demo-v1.gif)
+![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/)
-
+[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
 
 ## Project setup
 

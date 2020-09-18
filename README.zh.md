@@ -6,9 +6,9 @@
 
 这是一个极简的 vue admin 管理后台。它只包含了 Element UI & axios & iconfont & permission control & lint，这些搭建后台必要的东西。
 
-![image](img/hlp/covid19-dc-demo-v1.gif)
+![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/)
+[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/dist/index.html)
 
 ## Project setup
 
