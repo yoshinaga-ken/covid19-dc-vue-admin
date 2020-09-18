@@ -44,8 +44,16 @@ module.exports = {
     name: name,
     resolve: {
       alias: {
-        '@': resolve('src')
+        '@': resolve('src'),
+        // bind version of jquery-ui
+        'jquery-ui': 'jquery-ui-dist/jquery-ui.js',
+        // bind to modules;
+        modules: path.join(__dirname, 'node_modules')
       }
+    },
+    devtool: 'source-map',
+    optimization: {
+      minimize: false
     }
   },
   chainWebpack(config) {
