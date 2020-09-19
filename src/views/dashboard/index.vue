@@ -292,7 +292,7 @@ const m_ = {
 
   ndx: {},
   data_type: 1, // 感染者情報のデータタイプ。1:感染者情報 0:それ以外
-  data_hdr: [],
+  data_hdr: null,
   data: [], // 感染者情報のデータ
   names: {},
   citys: [],
@@ -751,7 +751,7 @@ const m_ = {
     if (!is_comp) return
 
     // StackBarチャートを選択したらフィルタがかかるようにする
-    chart.selectAll('rect.bar').on('click', function(d) {
+    chart.selectAll('rect.bar').on('click', function(e, d) {
       // chart.filter(null).filter(d.data.key).redrawGroup();//単一選択
       chart.filter(d.data.key).redrawGroup()// 追加選択
       // chart.filter(multikey(d.x, d.layer));//子供項目選択
@@ -1189,13 +1189,13 @@ const m_ = {
     })
 
     if (m_.get.light === undefined) {
-      //initPrefTable()
+      // initPrefTable()
     }
   }
 }
 
 const initDc = (data) => {
-  m_.data_hdr = data.shift()
+  if (m_.data_hdr === null) m_.data_hdr = data.shift()
   m_.data = data
 
   // ヘッダの最終カラムから、データオプションを取得
