@@ -478,11 +478,11 @@ const m_ = {
     }
     return txt
   },
-  chartNameFilters: function(pre0) {
+  chartNameFilters: function(ja_prefs) {
     // m_.chartNameにない物は除外
     const pre_names = _.keys(m_.names)
     const pre = []
-    for (const i of pre0) {
+    for (const i of ja_prefs) {
       if (_.indexOf(pre_names, i) !== -1) pre.push(i)
     }
     if (pre.length === 0) {
@@ -2491,14 +2491,22 @@ const drawJapanMap = () => {
               el.html(html)
             } : false,
 
-    onRegionSelected: (/* e,name,is_on*/) => {
+    onRegionSelected: (e/*, name, is_selected*/) => {
       if (m_.is_filter_region_sel) return
       // 選択を取得
       const xs = map.getSelectedRegions()
-      const a = xs.map(x => map.mapData.paths[x].name)
+      const ja_prefs = xs.map(x => map.mapData.paths[x].name)
+      // const ja_prefs_sel = map.mapData.paths[name].name
       // 名前チャートフィルタ
-      m_.chartNameFilters(a)
+      m_.chartNameFilters(ja_prefs)
       m_.is_drawJapanMap = 0
+
+      // m_.chartScroll('#div_name', is_selected ? ja_prefs_sel : ja_prefs[0], 300)
+      if(ja_prefs.length){
+        m_.chartScroll('#div_name', ja_prefs[0], 300)
+      }else{
+        document.querySelector('#div_name').scrollTop=0;
+      }
 
       if (m_.chartName.filters().length && $('#ui-datepicker-div').is(':visible')) {
         m_.datePick.datepicker('hide')
