@@ -61,7 +61,7 @@
           </div>
         </div>
         <div v-show="pnl.date.is_show" id="panel_date" class="dc_panel drag">
-          <span class="chart-title" v-html="pnl.date.title"><i class="fa fa-procedures" />感染者数</span>
+          <span class="chart-title" v-html="pnl.date.title"><i class="fa fa-procedures" />感染者数</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <span class="btn_brush btn_off" title="ブラシベースの範囲選択をオン/オフします。&#x0A;Ctrlを押しながら日付バーをクリックで追加選択になります。"><span class="ui-icon ui-icon-arrow-2-e-w sp_icon" />選択</span>
           <a id="btn_reset_date" class="btn_reset" href="javascript:void(0);" style="display: none;"><span class="ui-icon ui-icon-closethick" /></a>
           <input type="text" class="filter_txt" readonly style="display: none;">&nbsp;<span class="filter_txt_diff" />
@@ -148,6 +148,7 @@ import g_covid19_assets from '@/data/covid19-assets.json'
 import g_covid19_data from '@/data/covid19-data.json'
 
 import jQuery from 'jquery'
+const $ = jQuery
 global.jquery = jQuery
 global.$ = jQuery
 window.$ = window.jQuery = require('jquery')
@@ -429,7 +430,7 @@ const m_ = {
       for (const i of sp) {
         t += i.trim() + PL
       }
-      txt[1] = (sp.length == 1 ? '' : '【') + php.trim(t, PL) + (sp.length == 1 ? '' : '】')
+      txt[1] = (sp.length === 1 ? '' : '【') + php.trim(t, PL) + (sp.length === 1 ? '' : '】')
     }
 
     if (city !== '') {
@@ -437,7 +438,7 @@ const m_ = {
       txt[2] = (is ? '【' : '') + city + (is ? '】' : '')
     }
 
-    if (date != '') {
+    if (date !== '') {
       if (m_.chartDate.filters().length) {
         if (m_.chartDate.brushOn()) {
           txt.push(date)
@@ -446,33 +447,33 @@ const m_ = {
           for (const i of sp) {
             t += i + PL
           }
-          txt[0] = (sp.length == 1 ? '' : '【') + php.trim(t, PL) + (sp.length == 1 ? '' : '】')
+          txt[0] = (sp.length === 1 ? '' : '【') + php.trim(t, PL) + (sp.length === 1 ? '' : '】')
         }
       }
     }
-    if (week != '') {
+    if (week !== '') {
       const is = week.indexOf(',') !== -1
       txt[3] = '曜日:' + (is ? '【' : '') + week + (is ? '】' : '')
     }
-    if (age != '') {
+    if (age !== '') {
       let t = ''; const sp = age.split(',')
       for (const i of sp) t += m_.ageTickFormat(+i) + PL
-      txt[4] = '年齢:' + (sp.length == 1 ? '' : '【') + php.trim(t, PL) + (sp.length == 1 ? '' : '】')
+      txt[4] = '年齢:' + (sp.length === 1 ? '' : '【') + php.trim(t, PL) + (sp.length === 1 ? '' : '】')
     }
-    if (sex != '') {
+    if (sex !== '') {
       let t = ''; const sp = sex.split(',')
       if (sp.length !== 3) {
         for (const i of sp) {
           t += i.trim() + PL
         }
-        txt[5] = '性別:' + (sp.length == 1 ? '' : '【') + php.trim(t, PL) + (sp.length == 1 ? '' : '】')
+        txt[5] = '性別:' + (sp.length === 1 ? '' : '【') + php.trim(t, PL) + (sp.length === 1 ? '' : '】')
       }
     }
-    if (cond != '') {
+    if (cond !== '') {
       const is = cond.indexOf(',') !== -1
       txt[6] = '状態:' + (is ? '【' : '') + cond + (is ? '】' : '')
     }
-    if (job != '') {
+    if (job !== '') {
       const is = job.indexOf(',') !== -1
       txt[7] = '職業:' + (is ? '【' : '') + job + (is ? '】' : '')
     }
@@ -969,6 +970,15 @@ const m_ = {
       else o.animate({ scrollTop: top }, duration, 'swing')
     }
   },
+  panelResize: function() {
+    const w = $('#container2_dc').width() -
+          (app.pnl.map.is_show ? $('#chart_map').width() + 10 : 0) -
+          (app.pnl.name.is_show ? $('#panel_name').width() + 10 : 0) -
+          (app.pnl.city.is_show ? $('#panel_city').width() + 10 : 0) -
+          45
+    $('#panel_date').width(w)
+    m_.composite2.width(w)
+  },
   createFilteredBarStacksData: function() {
     const prefs = _.keys(PREF_EN)
     const dimName = m_.chartName.dimension()
@@ -993,7 +1003,7 @@ const m_ = {
       stacks2[i] = []
       from = moment(m_.spk.min_ymd)
       for (var j = 0; j <= nday; j++) {
-        const ymd = j == 0 ? from.format('YYMD') : from.add(1, 'days').format('YYMD')
+        const ymd = j === 0 ? from.format('YYMD') : from.add(1, 'days').format('YYMD')
         if (stacks[i][ymd] !== undefined) {
           stacks2[i][j] = stacks[i][ymd]
         } else {
@@ -1126,7 +1136,8 @@ const m_ = {
       m_.init()
 
       if (!is_local_html) {
-        const name = m_.get.data || m_.url_data.data; m_.loadDcData(name)
+        const name = m_.get.data || m_.url_data.data
+        m_.loadDcData(name)
       }
     }
 
@@ -1312,8 +1323,8 @@ const initDc = (data) => {
         .attr('xlink:href', function(d, i) {
           return PREF_EN[d.key] ? 'img/japan/' + PREF_EN[d.key] + '.gif' : IMG_NO
         })
-        .on('click', function(d) {
-          next = m_.url_name + '/' + d.key
+        .on('click', function(e, d) {
+          const next = m_.url_name + '/' + d.key
           window.open(next)
         })
     })
@@ -1588,7 +1599,7 @@ const initDc = (data) => {
     .elasticY(true)
     .group(gpDateStk2, 'PCR', function(d) {
       const flt_len = m_.chartName.filters().length
-      return (flt_len == 0 && m_.chartDate2Mode === DT_PCR) ? d.value.all[DT_PCR] : 0
+      return (flt_len === 0 && m_.chartDate2Mode === DT_PCR) ? d.value.all[DT_PCR] : 0
     })
     .stack(gpDateStk2, '死亡', function(d) {
       const flt_len = m_.chartName.filters().length
@@ -1767,6 +1778,12 @@ const initDc = (data) => {
     return moment(s).format('M/Dddd')
   })
   m_.composite2.yAxis().ticks(5).tickFormat(d3.format('~s'))// 1.5k
+
+  if (!IS_SP) {
+    m_.panelResize()
+    m_.composite.useViewBoxResizing(true)
+    m_.composite2.useViewBoxResizing(true)
+  }
 
   // ===========================================================================
   // CHART 性別 pie chartSex_init
@@ -2200,7 +2217,8 @@ const initTabs = () => {
           $('#japan-map').show()
           drawJapanMap()
           const ft = m_.getFilterTxt()
-          ft[1] = ''; fth = ft.join(' ').trim()
+          ft[1] = ''
+          const fth = ft.join(' ').trim()
           $('.hdr_flt_map').text(fth === '' ? '' : fth + 'の状況')
           $('#legend_n').show()
           $('#legend_p').hide()
@@ -2224,7 +2242,7 @@ const initTabs = () => {
             app.pnl.date.is_show = 0
             app.pnl.date.chart2.is_show = 0
 
-            gpName2 = m_.dimName2.group().reduce((p, v) => m_.pref_tbl_last_m1[v[D3_PL1]].bed, (p, v) => m_.pref_tbl_last_m1[v[D3_PL1]].bed, (p, v) => 0)
+            const gpName2 = m_.dimName2.group().reduce((p, v) => m_.pref_tbl_last_m1[v[D3_PL1]].bed, (p, v) => m_.pref_tbl_last_m1[v[D3_PL1]].bed, (p, v) => 0)
             m_.chartName.group(gpName2).render()
           } else {
             app.pnl.date.is_show = 1
@@ -2398,7 +2416,7 @@ const initAutoComplete = () => {
       html = html.replace(new RegExp(v, 'gi'), bv)
       if (is_cate_none) {
         const src = 'img/japan/' + PREF_EN[row[1]] + '.gif'
-        icon = '<img width="40" height="40" src="' + src + '" onerror="this.src=\'/' + IMG_NO + '\'" />'
+        const icon = '<img width="40" height="40" src="' + src + '" onerror="this.src=\'/' + IMG_NO + '\'" />'
         html = icon + html
       }
       return $("<li class='ac_ex-item'>").append($('<div>').html(html + '(' + row[3] + ')')).appendTo(ul)
@@ -2502,10 +2520,10 @@ const drawJapanMap = () => {
       m_.is_drawJapanMap = 0
 
       // m_.chartScroll('#div_name', is_selected ? ja_prefs_sel : ja_prefs[0], 300)
-      if(ja_prefs.length){
+      if (ja_prefs.length) {
         m_.chartScroll('#div_name', ja_prefs[0], 300)
-      }else{
-        document.querySelector('#div_name').scrollTop=0;
+      } else {
+        document.querySelector('#div_name').scrollTop = 0
       }
 
       if (m_.chartName.filters().length && $('#ui-datepicker-div').is(':visible')) {
@@ -2590,8 +2608,8 @@ const onDocumentReady = () => {
     beforeShowDay: function(date) {
       const ret = []
       const y = date.getFullYear()
-      const m = printf02d(date.getMonth() + 1)
-      const d = printf02d(date.getDate())
+      const m = php.printf02d(date.getMonth() + 1)
+      const d = php.printf02d(date.getDate())
       const ymd = y + m + d
 
       ret[0] = 1// is_selectable
@@ -2738,49 +2756,11 @@ const onDocumentReady = () => {
     $(this).select()
   })
 
-  $('#btn_ana').on('click', function(event) {
-    event.preventDefault()
-    $('#ana_diff_ls').hide().fadeIn()
-  })
-  $('.wopen').button().on('click', function(event) {
-    event.preventDefault()
-    const o = $(this)
-    const w2 = parseInt(screen.width / 2) - 20
-    const top = 50// for parent title bar
-    if (o.find('span').hasClass('ui-icon-arrow-2-e-w')) {
-      const td = o.closest('td')
-      const a = td.prev().find('a')
-      const b = td.next().find('a')
-      const wL = window.open(a.attr('href'), 1, 'top=' + top + ',left=0,height=' + (screen.height - top * 4) + ',width=' + w2)
-      const wR = window.open(b.attr('href'), 2, 'top=' + top + ',left=' + (w2 + 20) + ',height=' + (screen.height - top * 4) + ',width=' + w2)
-      $(wL).on('scroll', function(event) { // wL wR sync scroll
-        const wl = $(wL)
-        $(wR).scrollTop(wl.scrollTop()).scrollLeft(wl.scrollLeft())
-      })
-      $(wR).on('scroll', function(event) { // wL wR sync scroll
-        const wr = $(wR)
-        $(wL).scrollTop(wr.scrollTop()).scrollLeft(wr.scrollLeft())
-      })
-    } else if (o.find('span').hasClass('ui-icon-arrow-2-n-s')) {
-      const idx = o.closest('td').index()
-      const tr = o.closest('tr')
-      const a = tr.prev().find('td').eq(idx).find('a')
-      const b = tr.next().find('td').eq(idx).find('a')
-      const wL = window.open(a.attr('href'), 1, 'top=' + top + ',left=0,height=' + (screen.height - top * 4) + ',width=' + w2)
-      const wR = window.open(b.attr('href'), 2, 'top=' + top + ',left=' + (w2 + 20) + ',height=' + (screen.height - top * 4) + ',width=' + w2)
-      $(wL).on('scroll', function(event) { // wL wR sync scroll
-        const wl = $(wL)
-        $(wR).scrollTop(wl.scrollTop()).scrollLeft(wl.scrollLeft())
-      })
-      $(wR).on('scroll', function(event) { // wL wR sync scroll
-        const wr = $(wR)
-        $(wL).scrollTop(wr.scrollTop()).scrollLeft(wr.scrollLeft())
-      })
-    } else {
-      const idx = o.closest('td').index()
-      window.open(o.attr('href'), (idx === 0 ? 1 : 2), 'left=' + (idx === 0 ? 0 : w2 + 20) + ',top=' + top + ',height=' + (screen.height - top * 4) + ',width=' + w2)
+  if (!IS_SP) {
+    window.onresize = function() {
+      m_.panelResize()
     }
-  })
+  }
 
   // ShortCutKey
   $(document)
@@ -2903,7 +2883,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'name', 'sidebar'
     ]),
     settingsName: () => {
       const get_pathname_trimr = (pn) => {
@@ -2913,24 +2893,26 @@ export default {
       return 'covid19' + get_pathname_trimr(location.pathname)
     }
   },
+
   watch: {
     // pnl: {
     //   handler: function (v, old){
-    //     this.settingsSave();
+    //     this.onChangePnlIsShow();
     //   },
     //   deep: true
     // },
-    'pnl.map.is_show': function() { this.settingsSave() },
-    'pnl.name.is_show': function() { this.settingsSave() },
-    'pnl.city.is_show': function() { this.settingsSave() },
-    'pnl.date.is_show': function() { this.settingsSave() },
-    'pnl.sex.is_show': function() { this.settingsSave() },
-    'pnl.week.is_show': function() { this.settingsSave() },
-    'pnl.age.is_show': function() { this.settingsSave() },
-    'pnl.cond.is_show': function() { this.settingsSave() },
-    'pnl.job.is_show': function() { this.settingsSave() },
-    'pnl.detail.is_show': function() { this.settingsSave() },
-    'pnl.ana.is_show': function() { this.settingsSave() },
+    'sidebar.opened': function() { if (!IS_SP) _.delay(() => m_.panelResize(), 300) },
+    'pnl.map.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.name.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.city.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.date.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.sex.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.week.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.age.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.cond.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.job.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.detail.is_show': function() { this.onChangePnlIsShow() },
+    'pnl.ana.is_show': function() { this.onChangePnlIsShow() },
     'pnl.date.stack_type': function(v, old) {
       switch (v) {
         case 'con': m_.dateStakShow(0); break
@@ -2953,6 +2935,10 @@ export default {
         o[k] = { is_show: v.is_show ? 1 : 0 }
       })
       return o
+    },
+    onChangePnlIsShow: function() {
+      if (!IS_SP) m_.panelResize()
+      this.settingsSave()
     },
     settingsSave: function() {
       const shows = this.getPanelShows()
