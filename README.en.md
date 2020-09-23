@@ -8,7 +8,12 @@ A minimal vue admin template with Element UI & axios & iconfont & permission con
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-[Live demo](https://yoshinaga-ken.github.io/covid19-dc-vue-admin/)
+## Demo Page
+- https://yoshinaga-ken.github.io/covid19-dc-vue-admin/
+
+## How to change the displayed chart data?
+The data regarding the attributes of the infected person is [CSV file (covid19-data.csv)](public/data/covid19-data.csv). You can also modify the contents of this file to visualize other types of data.
+
 
 ## Project setup
 
