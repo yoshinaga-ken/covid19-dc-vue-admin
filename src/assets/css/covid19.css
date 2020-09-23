@@ -19,12 +19,12 @@
 
   #chart_map {
     float: left;
-    width: 460px;
+    width: 470px;
   }
 
   #japan-map,
   #japan-map svg {
-    width: 440px;
+    width: 460px;
     height: 450px;
   }
 

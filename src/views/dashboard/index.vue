@@ -144,8 +144,8 @@
 <script>
 import { mapGetters } from 'vuex'
 // import { getList } from '@/api/table'
-import g_covid19_assets from '@/data/covid19-assets.json'
-import g_covid19_data from '@/data/covid19-data.json'
+// import g_covid19_assets from '@/data/covid19-assets.json'
+// import g_covid19_data from '@/data/covid19-data.json'
 
 import jQuery from 'jquery'
 const $ = jQuery
@@ -269,7 +269,12 @@ const m_ = {
     }
   },
   get: php.location_get_query(),
-  url_data: { 'path': 'data\/', 'assets': 'covid19-assets.json', 'data': 'covid19-data.json' },
+  url_data: {
+    path: 'data/',
+    assets: 'covid19-assets.json',
+    // data: 'covid19-data.json'
+    data: 'covid19-data.csv'
+  },
   url_name: 'https://ja.wikipedia.org/wiki',
 
   //
@@ -1070,7 +1075,7 @@ const m_ = {
         }
         query = get_ci_pathname(location.pathname) + query
       }
-      history.replaceState(null, null, query)
+      // history.replaceState(null, null, query)
     }
     const is_csv = get_ext(m_.get.data).toLowerCase() === 'csv'
     const is_http = m_.get.data.indexOf('http') !== -1; let path = is_http ? m_.get.data : m_.url_data.path + m_.get.data
@@ -1104,7 +1109,7 @@ const m_ = {
   },
   loadAllData: () => {
     // const is_local_html = location.protocol === 'file:';
-    const is_local_html = 1
+    const is_local_html = 0
 
     m_.composite = new dc.CompositeChart('#chart_date', 'chartGroup')
     m_.chartDate = new dc.BarChart(m_.composite)
