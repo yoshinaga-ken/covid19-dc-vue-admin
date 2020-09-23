@@ -8,10 +8,10 @@ vueの Element UI＆axios＆iconfont＆permission control＆lintを備えた最�
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
  
-## デモページ
+# デモページ
 - https://yoshinaga-ken.github.io/covid19-dc-vue-admin/
 
-## 表示されているチャートのデータを変更する方法は？
+# 表示されているチャートのデータを変更する方法は？
 感染者の属性に関してのデータは[CSVファイル(covid19-data.csv)](public/data/covid19-data.csv)です。このファイルの内容を変更すれば他のタイプのデータの視覚化にも利用できます。
 おおよそ以下のようなフォーマットになっています。
 

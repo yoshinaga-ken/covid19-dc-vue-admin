@@ -8,10 +8,10 @@
 
 ![image](public/img/hlp/covid19-dc-vue-admin.gif)
 
-## Demo Page
+# Demo Page
 - https://yoshinaga-ken.github.io/covid19-dc-vue-admin/
 
-## 如何更改显示的图表数据？
+# 如何更改显示的图表数据？
 关于被感染者的属性的数据为[CSV文件（covid19-data.csv）](public/data/covid19-data.csv)。 您还可以修改此文件的内容以可视化其他类型的数据。
 
 
